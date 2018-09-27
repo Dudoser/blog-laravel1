@@ -23,7 +23,7 @@
     </div>
     <div class="list-group-item">
       <article>
-        {!! str_limit($post->body, $limit = 10, $end = "....... <a href=" . url( $post->slug) . ">Подробнее</a>") !!}
+        {!! str_limit($post->body, $limit = 15, $end = '....... <a href='.url($post->slug).'>Подробнее</a>') !!}
       </article>
     </div>
   </div>

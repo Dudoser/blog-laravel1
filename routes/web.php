@@ -19,7 +19,9 @@
 
 
 Route::get('/','PostController@index');
-Route::get('/home',['as' => 'home', 'uses' => 'PostController@index']);
+
+Auth::routes();
+// Route::get('/home',['as' => 'home', 'uses' => 'PostController@index']);
 //authentication
 /*Route::controllers([
  'auth' => 'Auth\Auth?Controller',
@@ -53,3 +55,6 @@ Route::get('user/{id}','UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/posts','UserController@user_posts')->where('id', '[0-9]+');
 // вывод одного поста
 Route::get('/{slug}',['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
