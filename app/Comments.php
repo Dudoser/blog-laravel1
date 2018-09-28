@@ -6,6 +6,7 @@ class Comments extends Model
 {
 	// таблица комментариев в базе данных
 	protected $quarded = [];
+	protected $fillable = ['body', 'on_post', 'from_user'];
 	// прокомментрировавший пользователь
 	public function author()
 	{

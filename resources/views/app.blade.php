@@ -29,8 +29,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li>
-              <a href="{{ url('/') }}">Главная</a>
-            </li>
+                          @if (!Auth::guest())
+                          <a href="{{ url('/new-post') }}">Добавить пост |</a>
+                          <a href="{{ url('/user/'.Auth::id()) }}">Мой профиль |</a>
+                          <a href="{{ url('/user/'.Auth::id().'/posts') }}">Мои посты </a>
+                          @endif
+                    </li>
             
                     </ul>
 
@@ -48,78 +52,21 @@
                                 @endif
                             </li>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a href="{{ url('/logout') }}">Logout</a>
+                            <!-- <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                    </form> -->
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" value="+" name="val" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle Navigation!</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">DevUserLab Laravel Demo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="{{ url('/') }}">Главная</a>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            @if (Auth::guest())
-            <li>
-              <a href="{{ url('/auth/login') }}">Логин</a>
-            </li>
-            <li>
-              <a href="{{ url('/auth/register') }}">Регистрация</a>
-            </li>
-            @else
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                @if (Auth::user()->can_post())
-                <li>
-                  <a href="{{ url('/new-post') }}">Добавить пост</a>
-                </li>
-                <li>
-                  <a href="{{ url('/user/'.Auth::id().'/posts') }}">Мои посты</a>
-                </li>
-                @endif
-                <li>
-                  <a href="{{ url('/user/'.Auth::id()) }}">Мой профиль</a>
-                </li>
-                <li>
-                  <a href="{{ url('/auth/logout') }}">Выйти</a>
-                </li>
-              </ul>
-            </li>
-            @endif
-          </ul>
-        </div>
-      </div>
-    </nav>
+    
     <div class="container">
       @if (Session::has('message'))
       <div class="flash alert-info">

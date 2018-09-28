@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Posts;
 use App\User;
 use Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class PostController extends Controller
 	public function create(Request $request)
 	{
 		// если пользователь может публиковать автор или администратор
+
 		if($request->user()->can_post())
 		{
 		  return view('posts.create');
@@ -38,10 +40,10 @@ class PostController extends Controller
 	public function store(PostFormRequest $request)
 	{
 		$post = new Posts();
-		$post->title = $request->get('title');
-		$post->body = $request->get('body');
+		$post->title = /*$request->get('title')*/ $_POST['title'];
+		$post->body = /*$request->get('body')*/ $_POST['body'];
 		$post->slug = str_slug($post->title);
-		$post->author_id = $request->user()->id;
+		$post->author_id = /*$request->user()->id*/ Auth::id();
 		if($request->has('save'))
 		{
 		  $post->active = 0;

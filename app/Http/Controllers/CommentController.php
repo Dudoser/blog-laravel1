@@ -6,6 +6,7 @@ use App\Posts;
 use App\Comments;
 use Redirect;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class CommentController extends Controller
     $input['on_post'] = $request->input('on_post');
     $input['body'] = $request->input('body');
     $slug = $request->input('slug');
-    Comments::create( $input );
+    Comments::create($input);
     return redirect($slug)->with('message', 'Comment published');     
   }
 }

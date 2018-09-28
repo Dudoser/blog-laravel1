@@ -26,6 +26,7 @@
     <div class="panel-body">
       <form method="post" action="/comment/add">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="ids" value="{{ Auth::id() }}">
         <input type="hidden" name="on_post" value="{{ $post->id }}">
         <input type="hidden" name="slug" value="{{ $post->slug }}">
         <div class="form-group">

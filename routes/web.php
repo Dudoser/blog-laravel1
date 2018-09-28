@@ -27,6 +27,12 @@ Auth::routes();
  'auth' => 'Auth\Auth?Controller',
  'password' => 'Auth\PasswordController',
 ]);*/
+
+
+
+Route::get('/logout', 'Auth\LoginController@logout');
+
+
 // проверка залогиненного пользователя
 Route::group(['middleware' => ['auth']], function()
 {
